@@ -1,1 +1,254 @@
-<h1>hi</h1>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 400px;
+      }
+    .info-box {
+	    min-height: 100px;
+	    width: 100%;
+	    box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+	    -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+	    margin-bottom: 20px;
+	    padding: 15px;
+	    border-radius: 25px;
+	}
+	.bg-b-purple {
+	    background: linear-gradient(45deg, #a52dd8, #e29bf1);
+	}
+	.info-box-icon.push-bottom {
+    margin-top: 20px;
+	}
+	.info-box-icon {
+    float: left;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    font-size: 30px;
+    /*line-height: 74px;*/
+    padding-top: 21px;
+    color: white;
+    background: rgba(0, 0, 0, .2);
+    border-radius: 100%;
+}
+.info-box-content {
+    padding: 10px 10px 10px 0;
+    margin-left: 90px;
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+.info-box-text, .progress-description {
+    display: block;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+}
+.info-box-number {
+    font-weight: 300;
+    font-size: 21px;
+}
+.info-box .progress, .info-box .progress .progress-bar {
+    border-radius: 0;
+}
+.progress-description {
+    margin: 0;
+}
+.info-box-text, .progress-description {
+    display: block;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+}
+.info-box .progress .progress-bar {
+    background: #fff;
+}
+.info-box .progress, .info-box .progress .progress-bar {
+    border-radius: 0;
+}
+.width-60 {
+    width: 60%;
+}
+.progress-bar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #007bff;
+    transition: width .6s ease;
+}
+.info-box .progress {
+    background: rgba(0, 0, 0, .2);
+    margin: 5px -10px 5px 0;
+    height: 2px;
+}
+/*start*/
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+    
+  </style>
+  </head>
+  <body>
+    <!-- SIDE BAR START -->
+    	<%- include('../partials/admin_sidebar.ejs'); %>
+    <!-- SIDE BAR END -->
+    <section id="contents">
+      <nav class="navbar navbar-default">
+        <!-- NAV BAR START -->
+    		<%- include('../partials/admin_navbar.ejs'); %>
+    	<!-- NAV BAR END -->
+      </nav>
+      <div class="welcome">
+        <!-- WELCOME BAR START -->
+    		<%- include('../partials/welcome.ejs'); %>
+    	<!-- WELCOME BAR END -->
+      </div>
+      <section class="statistics">
+        <!-- STATISTICS BAR START -->
+    		<%- include('../partials/admin_statistics.ejs'); %>
+    	<!-- STATISTICS BAR END -->
+      </section>
+      <section class="statistics">
+        <!-- STATISTICS BAR START -->
+        <%- include('../partials/dashboard_map.ejs'); %>
+      <!-- STATISTICS BAR END -->
+      </section>
+      <section class="charts">
+        <!-- CHARTS BAR START -->
+    		<%- include('../partials/admin_charts.ejs'); %>
+    	<!-- CHARTS BAR END -->
+      </section>
+      <section class="admins">
+        <!-- ADMINS LIST START -->
+    		<%#- include('../partials/admins_list.ejs'); %>
+    	<!-- ADMINS LIST END -->
+      </section>
+      <section class='statis text-center'>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box bg-primary">
+                <i class="fa fa-eye"></i>
+                <h3>5,154</h3>
+                <p class="lead">Page views</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box danger">
+                <i class="fa fa-user-o"></i>
+                <h3>245</h3>
+                <p class="lead">User registered</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box warning">
+                <i class="fa fa-shopping-cart"></i>
+                <h3>5,154</h3>
+                <p class="lead">Product sales</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="box success">
+                <i class="fa fa-handshake-o"></i>
+                <h3>5,154</h3>
+                <p class="lead">Transactions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="chrt3">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="chart-container">
+                <canvas id="chart3" width="100%"></canvas>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="row">
+      	<div class="col-md-4">
+		      <div class="info-box bg-b-purple">
+				<span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">Booked Trips</span>
+					<span class="info-box-number">450</span>
+					<div class="progress">
+						<div class="progress-bar width-60"></div>
+					</div>
+					<span class="progress-description">
+						60% Increase in 28 Days
+					</span>
+				</div>
+				<!-- /.info-box-content -->
+			</div>
+		</div>
+	</div>
+    </section>
+    <script src='http://code.jquery.com/jquery-latest.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <!-- <script src='../js/main.js'></script> -->
+    <script src='../js/dashboard.js'></script>
+  </body>
+</html>

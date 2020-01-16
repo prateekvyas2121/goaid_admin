@@ -1,0 +1,40 @@
+<div class="container statistics" id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+          map = new google.maps.Map(document.getElementById('map'),
+            {
+              center: new google.maps.LatLng(26.801452800000003,75.808624),
+              zoom: 16
+            }
+          );
+
+        var iconBase =
+            '../images/';
+
+        var icons = {
+          ambulance: {
+            icon: iconBase + 'car3.png'
+          },
+        };
+        // icons.features[i].type.icon
+
+        var features = [
+          {
+            position: new google.maps.LatLng(26.801452800000003, 75.808624),
+            type: 'ambulance'
+          }
+        ];
+
+        // Create markers.
+        for (var i = 0; i < features.length; i++){
+          var marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+            });
+          };
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnb1EqFOaMtH5WGkHBKjGVLOVihFoTH10&callback=initMap">
+    </script>

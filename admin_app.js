@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 const config = require('./config/database.js');
 var session = require('express-session');
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -17,6 +16,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+var sess; // global session, NOT recommended
 //VIEW ENGINE SETUP
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
@@ -24,19 +24,18 @@ app.set('view engine','ejs');
 //SETUP  PUBLIC FOLDER
 app.use(express.static(path.join(__dirname,'public')));
 
-
-// default route
-app.get('/', (req, res) => {
-	return res.send({ error: false, message: 'database connected successfully!' });
-
-});
-
 //setup admin routes
 	//admin authentication routes
-	const admin_authentication = require('./routes/admin_authentication.js');
-	app.use('/admin/',admin_authentication);
+	const admin_routes = require('./routes/admin_routes.js');
+	app.use('/admin/',admin_routes);
+	// //admin CRUD routes
+	// const admin_crud = require('./routes/admin_crud.js');
+	// app.use('add_admin',admin_crud);
 
-app.listen(5000, () => {
+app.listen(5000, (error) => {
+	if (error) {
+		console.log("ERROR =============>>>>>>",error);
+	}
 	console.log(' GoAid admin is running on port 5000');
 });
 
