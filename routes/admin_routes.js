@@ -86,12 +86,12 @@ router.get('/logout',(req,res) => {
 });
 
 //GET ADD ADMIN FORM
-router.get('/add_edit_admin',(req,res) => {
+router.get('/add_admin',(req,res) => {
 	// res.send("hi how r u ?")
 	sess = req.session;
     if(sess.email) {
     	console.log("add admin page =>",sess);
-        return res.render('admin/add_edit_admin.ejs',{
+        return res.render('admin/add_admin',{
         	current_admin:sess
         });
 
@@ -101,7 +101,7 @@ router.get('/add_edit_admin',(req,res) => {
 });
 
 //GET EDIT ADMIN FORM
-router.get('/add_edit_admin/:id',(req,res) => {
+router.get('/edit_admin/:id',(req,res) => {
 	// res.send("hi how r u ?")
 	sess = req.session;
     if(sess.email) {
@@ -109,17 +109,16 @@ router.get('/add_edit_admin/:id',(req,res) => {
         // return res.render('admin/add_edit_admin',{
         // 	current_admin:sess
         // });
-        var query = 'SELECT * FROM admin where id=?'
-        dbConn.query(query,[req.params.id],(error,admin,fields) => {
+        dbConn.query('SELECT * FROM admin where id=?',[req.params.id],(error,admin,fields) => {
         	// res.send(results);
         	if (error) throw error;
-        	return res.render('admin/add_edit_admin.ejs',{
+        	return res.render('admin/edit_admin',{
         		admin:admin,
         		current_admin:sess
         	});
         });
     }else{
-	res.render('admin/login.ejs');
+	    res.render('admin/login.ejs');
 	}
 });
 
@@ -161,7 +160,7 @@ router.get('/admins',(req,res) => {
 });
 
 //EDIT ADMIN
-router.post('/edit_admin', function (req, res) {
+router.post('/edit_admin/:id', function (req, res) {
     admin_data = req.body;
      // console.log(user)
      if (!admin_data) {

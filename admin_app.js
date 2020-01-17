@@ -16,13 +16,13 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-var sess; // global session, NOT recommended
+// var sess; // global session, NOT recommended
 //VIEW ENGINE SETUP
-app.set('views',path.join(__dirname,'views'));
+app.set('views',path.join(__dirname,'/views'));
 app.set('view engine','ejs');
 
 //SETUP  PUBLIC FOLDER
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'/public')));
 
 //setup admin routes
 	//admin authentication routes
@@ -39,4 +39,4 @@ app.listen(5000, (error) => {
 	console.log(' GoAid admin is running on port 5000');
 });
 
-module.exports = app;
+// module.exports = app;
