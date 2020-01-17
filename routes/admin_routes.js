@@ -112,10 +112,12 @@ router.get('/edit_admin/:id',(req,res) => {
         dbConn.query('SELECT * FROM admin where id=?',[req.params.id],(error,admin,fields) => {
         	// res.send(results);
         	if (error) throw error;
-        	return res.render('admin/edit_admin',{
+            var admin = admin;
+            res.render('admin/edit_admin',{
         		admin:admin,
         		current_admin:sess
         	});
+            console.log("admin =>>>>>>>",admin[0].email);
         });
     }else{
 	    res.render('admin/login.ejs');

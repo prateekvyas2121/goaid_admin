@@ -16,13 +16,14 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-// var sess; // global session, NOT recommended
+var sess; // global session, NOT recommended
+//SETUP  PUBLIC FOLDER
+app.use(express.static(path.join(__dirname,'public')));
+
 //VIEW ENGINE SETUP
-app.set('views',path.join(__dirname,'/views'));
+app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
-//SETUP  PUBLIC FOLDER
-app.use(express.static(path.join(__dirname,'/public')));
 
 //setup admin routes
 	//admin authentication routes

@@ -3,12 +3,13 @@
     <meta charset="UTF-8">
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../css/bootstrap3.3.7.min.css">
-    <link rel="stylesheet" href="../../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
   </head>
   <body>
     <!-- SIDE BAR START -->
+    <h1 class="text-center">hiiiiiiiiiiiiiiiiiiiii</h1>
       <%- include('../partials/admin_sidebar.ejs'); %>
     <!-- SIDE BAR END -->
     <section id="contents">
@@ -21,10 +22,10 @@
         <div class="row" style="background-color: white;">
           <div class="col-md-8">
 
-            <form action="/admin/edit_admin/<%- admin[0].id %>" method="post">
+            <form action="/admin/edit_admin/<%- admin.id %>" method="post">
               <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" value="<%- admin[0].email %>" name="email" class="form-control" id="email" placeholder="name@example.com">
+                <input type="email" value="<%- admin.email %>" name="email" class="form-control" id="email" placeholder="name@example.com">
               </div>
               <!-- <div class="form-group">
                 <label for="exampleFormControlSelect1">Example select</label>
@@ -38,7 +39,7 @@
               </div> -->
               <div class="form-group">
                  <label for="password">Password</label>
-                <input type="password" value="<%- admin[0].password %>" name="password" class="form-control" id="password" placeholder="password">
+                <input type="password" value="<%- admin.password %>" name="password" class="form-control" id="password" placeholder="password">
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-success" name="submit">
@@ -49,8 +50,8 @@
       </div>
     </section>
     <script src='http://code.jquery.com/jquery-latest.js' type="text/javascript"></script>
-    <script src='../../js/main.js' type="text/javascript"></script>
-    <script src='../../js/dashboard.js' type="text/javascript"></script>
+    <script src='../js/main.js' type="text/javascript"></script>
+    <script src='../js/dashboard.js' type="text/javascript"></script>
   </body> 
 </html>
 
