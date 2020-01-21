@@ -15,6 +15,17 @@ var mysql = require('mysql');
 
 dbConn.connect();
 
+// test database start
+ var dbConn2 = mysql.createConnection({
+     host: 'localhost',
+     user: 'root',
+     password: '',
+     database: 'goaid'
+ });
+
+dbConn2.connect();
+
+//test database end
 router.get('/login',(req,res) => {
 	// res.send("currently on login page");
 	sess = req.session;
@@ -25,15 +36,29 @@ router.get('/login',(req,res) => {
 	res.render('admin/login.ejs');
 	}
 });
-
-
+//map longitude latitude start
+// return res.render('admin/admin_dashboard.ejs',{
+//             current_admin:sess
+//         });
+//map long lat end
 router.get('/admin_dashboard',(req,res) => {
 	sess = req.session;
-    if(sess.email) {
-    	console.log("successfully7 email set =>",sess);
-        return res.render('admin/admin_dashboard.ejs',{
-        	current_admin:sess
+    if(true) {
+    	console.log("successfully email set =>",sess);
+        dbConn2.query('SELECT long_lat FROM reg where long_lat IS NOT NULL',(error , results , fields) => {
+            if(error){console.log(error);}
+            return res.render('admin/admin_dashboard.ejs',{
+                long_lats:results,
+                current_admin:sess
+            });
+            // res.send({
+            //     long_lat:results[0].long_lat.slice(10,31).split(","),
+            //     long:results[0].long_lat.slice(10,31).split(",")[0],
+            //     lat:results[0].long_lat.slice(10,31).split(",")[1]
+
+            // });
         });
+        
     }else{
     	console.log("sess not set");
 
@@ -161,7 +186,7 @@ router.get('/admins',(req,res) => {
 
 });
 
-//EDIT ADMIN
+//update ADMIN
 router.post('/edit_admin/:id', function (req, res) {
     admin_data = req.body;
      // console.log(user)
@@ -170,11 +195,32 @@ router.post('/edit_admin/:id', function (req, res) {
        	empty_form:'Empty data cannot be submitted'
        });
      }
-    dbConn.query("UPDATE users SET email = ? , password = ?   WHERE id = ?", [admin_data.email,admin_data.password, req.params.id], function (error, results, fields) {
-    if (error) throw error;
-     return res.send({ error: false, data: results, message: 'New user has been created successfully.' });
+    dbConn.query("UPDATE admin SET email = ? , password = ?   WHERE id = ?", [admin_data.email,admin_data.password, req.params.id], function (error, results, fields) {
+    if (error) {console.log(error)};
+     res.redirect('/admin/admins');
      });
 });
+
+//GET AND DELETE THE ADMIN
+router.get('/delete_admin/:id',(req,res) => {
+    const id = req.params.id;
+    dbConn.query('DELETE FROM admin WHERE id = ?', [id],(error,admin,fields) => {
+        if (error) {console.log('error while deleting ===>>>>',error)}
+        res.redirect('/admin/admins');
+    });
+});
+
+// //testing
+// router.get('/dummy_data', function (req, res) {
+   
+//     dbConn2.query('SELECT * FROM employee',(error, employees, fields) =>{
+//         if (error) {console.log(error)};
+//          res.send(employees);
+//      });
+
+// });
+
+
 
 //EXPORTS
 module.exports = router;

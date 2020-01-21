@@ -4,7 +4,7 @@
       function initMap() {
           map = new google.maps.Map(document.getElementById('map'),
             {
-              center: new google.maps.LatLng(26.801452800000003,75.808624),
+              center: new google.maps.LatLng(<%- parseFloat(long_lats[0].long_lat.slice(10,31).split(",")[0]) %>, <%- parseFloat(long_lats[0].long_lat.slice(10,31).split(",")[1])%>),
               zoom: 16
             }
           );
@@ -17,24 +17,28 @@
             icon: iconBase + 'car3.png'
           },
         };
-        // icons.features[i].type.icon
 
-        var features = [
-          {
-            position: new google.maps.LatLng(26.801452800000003, 75.808624),
-            type: 'ambulance'
-          }
-        ];
+        // JSON.stringify(long_lats);
+    
 
-        // Create markers.
-        for (var i = 0; i < features.length; i++){
-          var marker = new google.maps.Marker({
-            position: features[i].position,
-            icon: icons[features[i].type].icon,
-            map: map
-            });
-          };
-        }
+        <%#- console.log(features) %>
+
+        <%
+          long_lats.forEach((location) => {
+            // long_lat:results[0].long_lat.slice(10,31).split(","),
+            var long=location.long_lat.slice(10,31).split(",")[0];
+            var lat =location.long_lat.slice(10,31).split(",")[1];
+           %>
+            
+            var marker = new google.maps.Marker({
+                position:  new google.maps.LatLng(<%- parseFloat(long) %>,<%- parseFloat(lat) %>),
+                icon: "../images/car3.png",
+                map: map
+              });
+
+           <%
+          });
+        %>
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnb1EqFOaMtH5WGkHBKjGVLOVihFoTH10&callback=initMap">
     </script>
