@@ -1,11 +1,11 @@
-<div class="container statistics" id="map"></div>
+<div class="container-fluid" id="map"></div>
     <script>
       var map;
       function initMap() {
           map = new google.maps.Map(document.getElementById('map'),
             {
               center: new google.maps.LatLng(<%- parseFloat(long_lats[0].long_lat.slice(10,31).split(",")[0]) %>, <%- parseFloat(long_lats[0].long_lat.slice(10,31).split(",")[1])%>),
-              zoom: 16
+              zoom: 10
             }
           );
 
@@ -18,11 +18,6 @@
           },
         };
 
-        // JSON.stringify(long_lats);
-    
-
-        <%#- console.log(features) %>
-
         <%
           long_lats.forEach((location) => {
             // long_lat:results[0].long_lat.slice(10,31).split(","),
@@ -33,12 +28,14 @@
             var marker = new google.maps.Marker({
                 position:  new google.maps.LatLng(<%- parseFloat(long) %>,<%- parseFloat(lat) %>),
                 icon: "../images/car3.png",
-                map: map
+                map: map,
               });
 
            <%
           });
+
         %>
+      }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnb1EqFOaMtH5WGkHBKjGVLOVihFoTH10&callback=initMap">
     </script>

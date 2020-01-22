@@ -1,0 +1,204 @@
+<div class="container-fluid mt-20" style="background-color: white; border-radius: 10px;">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Queries</h2>
+    </div> 
+  </div>
+  <div class="">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tab1">Booking</a></li>
+    <li><a data-toggle="tab" href="#tab2">Corporate</a></li>
+    <li><a data-toggle="tab" href="#tab3">Partner</a></li>
+    <li><a data-toggle="tab" href="#tab4">Contact Us</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane fade in active">
+      <h3>Booking Queries</h3>
+      <p>Content for tab 1.</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Pickup Location</th>
+            <th scope="col">Drop Location</th>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Mobile No.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% booking_queries.forEach((booking) => { %>
+            <tr>
+              <th scope="row"><%- booking.id %></th>
+              <td><%- booking.pickup_location %></td>
+              <td><%- booking.drop_location %></td>
+              <td><%- booking.patient_name %></td>
+              <td><%- booking.mobile %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+                <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="tab2" class="tab-pane fade">
+      <h3>Corporate Queries</h3>
+      <p>Content for tab 2.</p>
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% corporate_queries.forEach((corporate) => { %>
+            <tr>
+              <th scope="row"><%- corporate.id %></th>
+              <td><%- corporate.name %></td>
+              <td><%- corporate.company_name %></td>
+              <td><%- corporate.email %></td>
+              <td><%- corporate.phone %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+                <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="tab3" class="tab-pane fade">
+      <h3>Partner Queries</h3>
+      <p>Content for tab 3.</p>
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Ambulance</th>
+            <th scope="col">Vehicle</th>
+            <!-- <th scope="col">Status</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <% partner_queries.forEach((partner) => { %>
+            <tr>
+              <th scope="row"><%- partner.id %></th>
+              <td><%- partner.name %></td>
+              <td><%- partner.phone %></td>
+              <td><%- partner.city %></td>
+              <td><%- partner.ambulance %></td>
+              <td><%- partner.vehicel %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+                <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="tab4" class="tab-pane fade">
+      <h3>Contact Form Queries</h3>
+      <p>Content for tab 4.</p>
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Company</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Message</th>
+            <!-- <th scope="col">Date</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <% contact_queries.forEach((contact) => { %>
+            <tr>
+              <th scope="row"><%- contact.id %></th>
+              <td><%- contact.name %></td>
+              <td><%- contact.company %></td>
+              <td><%- contact.phone %></td>
+              <td><%#- contact.massage %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="#<%- contact.id %>" data-toggle="modal">
+                  <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                </a>
+              <!-- Modal -->
+              <div class="modal fade" id="<%- contact.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                      <h4 class="modal-title">Query Data</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong class="pull-left">name:</strong>
+                        </div>
+                        <div class="col-md-8">
+                          <span>
+                            <%- contact.name %>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong class="pull-left">Company:</strong>
+                        </div>
+                        <div class="col-md-8">
+                          <span>
+                            <%- contact.company %>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong class="pull-left">Phone Number:</strong>
+                        </div>
+                        <div class="col-md-8">
+                          <span>
+                            <%- contact.phone %>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong class="pull-left">Message:</strong>
+                        </div>
+                        <div class="col-md-8">
+                          <span>
+                            <%- contact.massage %>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+  
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>

@@ -164,8 +164,15 @@
       </section>
       <section class="statistics">
         <!-- STATISTICS BAR START -->
-        <%- include('../partials/dashboard_map.ejs'); %>
-      <!-- STATISTICS BAR END -->
+          <!-- <input type="submit" class="btn btn-primary div" value="refresh" name=""> -->
+          <div class="container-fluid clearfix">
+            <i class="fa fa-refresh div pull-right fa-2x" data-toggle="tooltip" data-placement="top" title="Click me to refresh map" style="cursor:pointer;" aria-hidden="true"></i>
+          </div>
+          <!-- <br> -->
+          <div class="clearfix">
+            <%- include('../partials/dashboard_map.ejs'); %>
+          </div>
+        <!-- STATISTICS BAR END -->
       </section>
       <section class="charts">
         <!-- CHARTS BAR START -->
@@ -226,7 +233,8 @@
           </div>
         </div>
       </section>
-      <div class="row">
+      <!-- BOOKED TRIPS -->
+      <!-- <div class="row">
       	<div class="col-md-4">
 		      <div class="info-box bg-b-purple">
 				<span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
@@ -240,15 +248,34 @@
 						60% Increase in 28 Days
 					</span>
 				</div>
-				<!-- /.info-box-content -->
 			</div>
 		</div>
-	</div>
+	</div> -->
     </section>
     <script src='http://code.jquery.com/jquery-latest.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <!-- <script src='../js/main.js'></script> -->
     <script src='../js/dashboard.js'></script>
+
+    <script type="text/javascript">
+      $('.div').on('click',(e) => {
+        e.preventDefault();
+          $.ajax({
+              type: 'GET',
+              url: "dashboard_map",
+              success:function(data){
+                console.log("map data =========>>>>>>>>>",data);
+                $('#map').load('dashboard_map')
+              }
+          });
+      });
+
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
   </body>
 </html>

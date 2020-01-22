@@ -11,21 +11,24 @@ var mysql = require('mysql');
      user: 'root',
      password: '',
      database: 'goaid_admin'
+
  });
 
 dbConn.connect();
 
-// test database start
+// GoAid website  database start
  var dbConn2 = mysql.createConnection({
-     host: 'localhost',
-     user: 'root',
-     password: '',
-     database: 'goaid'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'goaid',
+    debug: false,
+    multipleStatements: true
  });
 
 dbConn2.connect();
 
-//test database end
+// GoAid website  database end
 router.get('/login',(req,res) => {
 	// res.send("currently on login page");
 	sess = req.session;
@@ -60,14 +63,32 @@ router.get('/admin_dashboard',(req,res) => {
         });
         
     }else{
-    	console.log("sess not set");
-
-//     res.redirect('/admin/login');
 	return res.redirect('/admin/login');
 	}
 });
+// START
+router.get('/dashboard_map',(req,res) => {
+    sess = req.session;
+    if(true) {
+        console.log("auto refresh",sess);
+        dbConn2.query('SELECT long_lat FROM reg where long_lat IS NOT NULL',(error , results , fields) => {
+            if(error){console.log(error);}
+            // return res.render('admin/admin_dashboard.ejs',{
+            //     long_lats:results,
+            //     current_admin:sess
+            // });
+            res.render('partials/dashboard_map.ejs',{
+                long_lats:results,
+                current_admin:sess
+            });
+        });
+        
+    }else{
+    return res.redirect('/admin/login');
+    }
+});
 
-
+//END
 router.post('/login/admin_dashboard',(req,res) => {
 	sess = req.session;
     sess.email = req.body.email;
@@ -210,17 +231,36 @@ router.get('/delete_admin/:id',(req,res) => {
     });
 });
 
-// //testing
-// router.get('/dummy_data', function (req, res) {
-   
-//     dbConn2.query('SELECT * FROM employee',(error, employees, fields) =>{
-//         if (error) {console.log(error)};
-//          res.send(employees);
-//      });
+//GET INQUIRIES
 
-// });
+router.get('/queries',(req,res) => {
+    // res.send("inquiries list")
+    sess = req.session;
+    if (sess.email) {
+        // res.render('admin/queries',{
+        //     current_admin:sess
+        // });
+        var sql = "SELECT * FROM tbl_need_ambulance;SELECT * FROM tbl_goaid_corporate;";
+            sql+= "SELECT * FROM tbl_partner_enquiry;SELECT * FROM tbl_contact";
+        dbConn2.query(sql,(error,results,fields) => {
+            if (error) {console.log("RETRIEVING ERROR =====>>>>",error)}
+            var tbl_need_ambulance = results[0];
+            var tbl_goaid_corporate = results[1];
+            var tbl_partner_enquiry = results[2];
+            var tbl_contact = results[3];
+            res.render('admin/queries',{
+                current_admin:sess,
+                contact_queries:tbl_contact,
+                corporate_queries:tbl_goaid_corporate,
+                booking_queries:tbl_need_ambulance,
+                partner_queries:tbl_partner_enquiry
+            });
+        });
+    }else{
+        res.render('admin/login');
+    }
 
-
+});
 
 //EXPORTS
 module.exports = router;
