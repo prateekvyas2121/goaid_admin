@@ -14,7 +14,9 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#tab1">Verify</a></li>
     <li><a data-toggle="tab" href="#tab2">Verified</a></li>
-    <li><a data-toggle="tab" href="#tab3">Transaction</a></li>
+    <li><a data-toggle="tab" href="#tab3">Transactions</a></li>
+    <li><a data-toggle="tab" href="#tab4">Update Documents Request</a></li>
+    <li><a data-toggle="tab" href="#tab5">Expired Documents</a></li>
   </ul>
   <div class="tab-content">
     <div id="tab1" class="tab-pane fade in active">
@@ -86,6 +88,80 @@
       </table>
     </div>
     <div id="tab3" class="tab-pane fade">
+      <h3>Partner Queries</h3>
+      <p>Content for tab 3.</p>
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Ambulance</th>
+            <th scope="col">Vehicle</th>
+            <!-- <th scope="col">Status</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <%
+            var count = 1;
+          %>
+          <% partner_queries.forEach((partner) => { %>
+            <tr>
+              <th scope="row"><%- count++ %></th>
+              <td><%- partner.name %></td>
+              <td><%- partner.phone %></td>
+              <td><%- partner.city %></td>
+              <td><%- partner.ambulance %></td>
+              <td><%- partner.vehicel %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+                <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="tab4" class="tab-pane fade">
+      <h3>Partner Queries</h3>
+      <p>Content for tab 3.</p>
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Ambulance</th>
+            <th scope="col">Vehicle</th>
+            <!-- <th scope="col">Status</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <%
+            var count = 1;
+          %>
+          <% partner_queries.forEach((partner) => { %>
+            <tr>
+              <th scope="row"><%- count++ %></th>
+              <td><%- partner.name %></td>
+              <td><%- partner.phone %></td>
+              <td><%- partner.city %></td>
+              <td><%- partner.ambulance %></td>
+              <td><%- partner.vehicel %></td>
+              <td><%#- contact.modify %></td>
+              <td>
+                <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+                <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div id="tab5" class="tab-pane fade">
       <h3>Partner Queries</h3>
       <p>Content for tab 3.</p>
        <table class="table">

@@ -357,5 +357,47 @@ router.get('/partners',(req,res) => {
     }
 
 });
+
+//PASSENGERS LIST
+router.get('/passengers',(req,res) => {
+    // res.send(req.session);
+    sess = req.session;
+    // console.log()
+    if (sess.email) {
+        dbConn.query('SELECT * FROM admin',(error, admins, fields) => {
+            if (error) throw error;
+             // return res.send({ error: false, data: results, message: 'users list.' });
+            res.render('admin/passengers',{
+                current_admin:sess,
+                admins:admins
+            });
+         });
+        
+    }else{
+    res.render('admin/login.ejs');
+    }
+
+});
+
+//FARE MANAGEMENT LIST 
+router.get('/fare_management',(req,res) => {
+    // res.send(req.session);
+    sess = req.session;
+    // console.log()
+    if (sess.email) {
+        dbConn.query('SELECT * FROM admin',(error, admins, fields) => {
+            if (error) throw error;
+             // return res.send({ error: false, data: results, message: 'users list.' });
+            res.render('admin/fares',{
+                current_admin:sess,
+                admins:admins
+            });
+         });
+        
+    }else{
+    res.render('admin/login.ejs');
+    }
+
+});
 //EXPORTS
 module.exports = router;

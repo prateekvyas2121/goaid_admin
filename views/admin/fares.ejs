@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fare Management</title>
+    <link rel="stylesheet" href="../css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="../css/standard.css">
+
+    <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <!-- SIDE BAR START -->
+    	<%- include('../partials/admin_sidebar.ejs'); %>
+    <!-- SIDE BAR END -->
+    <section id="contents">
+      <nav class="navbar navbar-default">
+        <!-- NAV BAR START -->
+          <%- include('../partials/admin_navbar.ejs'); %>
+        <!-- NAV BAR END -->
+      </nav>
+      <div class="container-fluid">
+        <!-- NAV BAR START -->
+          <%- include('../partials/fares_list.ejs'); %>
+        <!-- NAV BAR END -->
+      </div>
+
+
+    </section>
+    <script src='http://code.jquery.com/jquery-latest.js'></script>
+    <script src='../js/main.js'></script>
+    <script src='../js/dashboard.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
+
