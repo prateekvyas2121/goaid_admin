@@ -20,7 +20,7 @@
   <tbody>
     <% admins.forEach((admin) => { %>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><img src="<%- admin.image %>" style="width: 40px; height: 40px;"></th>
       <td><%- admin.email %></td>
       <td>
         <a href="/admin/edit_admin/<%- admin.id %>"><i class="fa fa-edit"></i></a>

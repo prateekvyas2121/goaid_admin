@@ -26,9 +26,12 @@
           </tr>
         </thead>
         <tbody>
+          <%
+            var count = 1;
+          %>
           <% booking_queries.forEach((booking) => { %>
             <tr>
-              <th scope="row"><%- booking.id %></th>
+              <th scope="row"><%- count++ %></th>
               <td><%- booking.pickup_location %></td>
               <td><%- booking.drop_location %></td>
               <td><%- booking.patient_name %></td>
@@ -57,9 +60,12 @@
           </tr>
         </thead>
         <tbody>
+          <%
+            var count = 1;
+          %>
           <% corporate_queries.forEach((corporate) => { %>
             <tr>
-              <th scope="row"><%- corporate.id %></th>
+              <th scope="row"><%- count++ %></th>
               <td><%- corporate.name %></td>
               <td><%- corporate.company_name %></td>
               <td><%- corporate.email %></td>
@@ -90,9 +96,12 @@
           </tr>
         </thead>
         <tbody>
+          <%
+            var count = 1;
+          %>
           <% partner_queries.forEach((partner) => { %>
             <tr>
-              <th scope="row"><%- partner.id %></th>
+              <th scope="row"><%- count++ %></th>
               <td><%- partner.name %></td>
               <td><%- partner.phone %></td>
               <td><%- partner.city %></td>
@@ -116,24 +125,28 @@
           <tr>
             <th scope="col">No.</th>
             <th scope="col">Name</th>
+            
+
             <th scope="col">Company</th>
             <th scope="col">Phone</th>
-            <th scope="col">Message</th>
+            <!-- <th scope="col">Message</th> -->
             <!-- <th scope="col">Date</th> -->
+            <th scope="col">See Query</th>
           </tr>
         </thead>
         <tbody>
+          <%
+            var count = 1;
+          %>
           <% contact_queries.forEach((contact) => { %>
             <tr>
-              <th scope="row"><%- contact.id %></th>
+              <th scope="row"><%- count++ %></th>
               <td><%- contact.name %></td>
               <td><%- contact.company %></td>
               <td><%- contact.phone %></td>
-              <td><%#- contact.massage %></td>
-              <td><%#- contact.modify %></td>
               <td>
                 <a href="#<%- contact.id %>" data-toggle="modal">
-                  <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                  <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
                 </a>
               <!-- Modal -->
               <div class="modal fade" id="<%- contact.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -144,7 +157,7 @@
                       <h4 class="modal-title">Query Data</h4>
                     </div>
                     <div class="modal-body">
-                      <div class="row">
+                      <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-4">
                           <strong class="pull-left">name:</strong>
                         </div>
@@ -154,7 +167,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-4">
                           <strong class="pull-left">Company:</strong>
                         </div>
@@ -164,7 +177,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-4">
                           <strong class="pull-left">Phone Number:</strong>
                         </div>
@@ -174,20 +187,19 @@
                           </span>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" style="margin-bottom: 15px;">
                         <div class="col-md-4">
                           <strong class="pull-left">Message:</strong>
                         </div>
                         <div class="col-md-8">
-                          <span>
+                          <p style="word-wrap: break-word; text-align: justify;">
                             <%- contact.massage %>
-                          </span>
+                          </p>
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/tableexport.min.css">
+
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <style type="text/css">
     </style>
@@ -34,7 +36,13 @@
     <script src='../js/main.js'></script>
     <script src='../js/dashboard.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="../js/FileSaver.js"></script>
+    <script type="text/javascript" src="../js/tableexport.min.js"></script>
+    <script type="text/javascript">
+      $("table").tableExport({
+            bootstrap: true
+      });
+    </script>
   </body>
 </html>
 

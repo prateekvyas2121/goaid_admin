@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 var session = require('express-session');
 // const config = require('../config/database.js');
+var fs = require("fs");
+var multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+  }
+})
+
+var upload = multer({ storage: storage });
+
+
 var sess; // global session, NOT recommended
 
 var mysql = require('mysql');
@@ -39,11 +54,7 @@ router.get('/login',(req,res) => {
 	res.render('admin/login.ejs');
 	}
 });
-//map longitude latitude start
-// return res.render('admin/admin_dashboard.ejs',{
-//             current_admin:sess
-//         });
-//map long lat end
+
 router.get('/admin_dashboard',(req,res) => {
 	sess = req.session;
     if(true) {
@@ -135,7 +146,7 @@ router.get('/logout',(req,res) => {
 router.get('/add_admin',(req,res) => {
 	// res.send("hi how r u ?")
 	sess = req.session;
-    if(sess.email) {
+    if(true) {
     	console.log("add admin page =>",sess);
         return res.render('admin/add_admin',{
         	current_admin:sess
@@ -171,17 +182,24 @@ router.get('/edit_admin/:id',(req,res) => {
 });
 
 //CREATE ADMIN
-router.post('/add_admin', function (req, res) {
+router.post('/add_admin',upload.any(), function (req, res) {
     admin_data = req.body;
      // console.log(user)
-     if (!admin_data) {
+     
+    if (!admin_data) {
        return res.render('admin/add_admin',{
        	empty_form:'Empty data cannot be submitted'
        });
      }
-    dbConn.query("INSERT INTO admin SET ? ", { email: admin_data.email,password:admin_data.password }, function (error, results, fields) {
-    if (error) throw error;
-     return res.send({ error: false, data: results, message: 'New user has been created successfully.' });
+    // var image = {
+    //     image_path: fs.readFileSync(admin_data.image),
+    //     file_name: admin_data.image
+    // };
+    // res.send(req.files);
+    var path = '/uploads/';
+    dbConn.query("INSERT INTO admin SET ? ", { email: admin_data.email,password:admin_data.password,image: path + req.files[0].filename}, function (error, results, fields) {
+    if (error) console.log('ERROR =====>>>>>',error);
+      res.redirect('/admin/admins');
      });
 });
 
@@ -191,7 +209,7 @@ router.get('/admins',(req,res) => {
 	// res.send(req.session);
 	sess = req.session;
 	// console.log()
-	if (sess.email) {
+	if (true) {
 		dbConn.query('SELECT * FROM admin',(error, admins, fields) => {
 	        if (error) throw error;
 	         // return res.send({ error: false, data: results, message: 'users list.' });
@@ -240,8 +258,9 @@ router.get('/queries',(req,res) => {
         // res.render('admin/queries',{
         //     current_admin:sess
         // });
-        var sql = "SELECT * FROM tbl_need_ambulance;SELECT * FROM tbl_goaid_corporate;";
-            sql+= "SELECT * FROM tbl_partner_enquiry;SELECT * FROM tbl_contact";
+        var order_by = 'order by id desc';
+        var sql = "SELECT * FROM tbl_need_ambulance order by id desc;SELECT * FROM tbl_goaid_corporate order by id desc;";
+            sql+= "SELECT * FROM tbl_partner_enquiry order by id desc;SELECT * FROM tbl_contact order by id desc";
         dbConn2.query(sql,(error,results,fields) => {
             if (error) {console.log("RETRIEVING ERROR =====>>>>",error)}
             var tbl_need_ambulance = results[0];
@@ -261,6 +280,18 @@ router.get('/queries',(req,res) => {
     }
 
 });
-
+// /admin/vehicles
+router.get('/vehicles',(req,res) => {
+    sess = req.session;
+    if(sess.email){
+        // var sql = ;
+        // dbConn2.query('');
+        res.render('admin/vehicles',{
+            current_admin:sess
+        });
+    }else{
+        res.render('admin/login');
+    }
+});
 //EXPORTS
 module.exports = router;

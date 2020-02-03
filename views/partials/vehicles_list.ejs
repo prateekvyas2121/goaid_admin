@@ -1,0 +1,33 @@
+<div class="container-fluid mt-20" style="background-color: white; border-radius: 2px;">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Vehicles</h2>
+    </div>
+    <div class="col-md-4 mt-20">
+      <a href="/admin/add_admin" class="pull-right btn btn-primary">
+        <i class="fa fa-plus-square"></i>
+        &nbsp;Add Vehicle
+      </a>
+    </div>  
+  </div>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%## admins.forEach((admin) => { %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%#- admin.email %></td>
+      <td>
+        <a href="/admin/edit_admin/<%#- admin.id %>"><i class="fa fa-edit"></i></a>
+        <a href="/admin/delete_admin/<%#- admin.id %>"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+    <%# }); %>
+  </tbody>
+</table>
+</div>
