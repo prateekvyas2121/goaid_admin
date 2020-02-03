@@ -203,6 +203,22 @@ router.post('/add_admin',upload.any(), function (req, res) {
      });
 });
 
+//update ADMIN
+router.post('/edit_admin/:id',upload.any(), function (req, res) {
+    admin_data = req.body;
+     // console.log(user)
+     if (!admin_data) {
+       return res.render('admin/add_admin',{
+           empty_form:'Empty data cannot be submitted'
+       });
+     }
+    var path = '/uploads/';
+    dbConn.query("UPDATE admin SET email = ? , password = ?,image = ?   WHERE id = ?", [admin_data.email,admin_data.password,path + req.files[0].filename, req.params.id], function (error, results, fields) {
+    if (error) {console.log(error)};
+     res.redirect('/admin/admins');
+     });
+});
+
 
 //ADMIN LIST
 router.get('/admins',(req,res) => {
@@ -225,20 +241,6 @@ router.get('/admins',(req,res) => {
 
 });
 
-//update ADMIN
-router.post('/edit_admin/:id', function (req, res) {
-    admin_data = req.body;
-     // console.log(user)
-     if (!admin_data) {
-       return res.render('admin/add_admin',{
-       	empty_form:'Empty data cannot be submitted'
-       });
-     }
-    dbConn.query("UPDATE admin SET email = ? , password = ?   WHERE id = ?", [admin_data.email,admin_data.password, req.params.id], function (error, results, fields) {
-    if (error) {console.log(error)};
-     res.redirect('/admin/admins');
-     });
-});
 
 //GET AND DELETE THE ADMIN
 router.get('/delete_admin/:id',(req,res) => {
@@ -292,6 +294,68 @@ router.get('/vehicles',(req,res) => {
     }else{
         res.render('admin/login');
     }
+});
+
+//RIDES LIST
+router.get('/rides',(req,res) => {
+    // res.send("inquiries list")
+    sess = req.session;
+    if (sess.email) {
+        // res.render('admin/queries',{
+        //     current_admin:sess
+        // });
+        // var order_by = 'order by id desc';
+        var sql = "SELECT * FROM tbl_need_ambulance order by id desc;SELECT * FROM tbl_goaid_corporate order by id desc;";
+            sql+= "SELECT * FROM tbl_partner_enquiry order by id desc;SELECT * FROM tbl_contact order by id desc";
+        dbConn2.query(sql,(error,results,fields) => {
+            if (error) {console.log("RETRIEVING ERROR =====>>>>",error)}
+            var tbl_need_ambulance = results[0];
+            var tbl_goaid_corporate = results[1];
+            var tbl_partner_enquiry = results[2];
+            var tbl_contact = results[3];
+            res.render('admin/rides',{
+                current_admin:sess,
+                contact_queries:tbl_contact,
+                corporate_queries:tbl_goaid_corporate,
+                booking_queries:tbl_need_ambulance,
+                partner_queries:tbl_partner_enquiry
+            });
+        });
+    }else{
+        res.render('admin/login');
+    }
+
+});
+
+//PARTNERS LIST
+router.get('/partners',(req,res) => {
+    // res.send("inquiries list")
+    sess = req.session;
+    if (sess.email) {
+        // res.render('admin/queries',{
+        //     current_admin:sess
+        // });
+        // var order_by = 'order by id desc';
+        var sql = "SELECT * FROM tbl_need_ambulance order by id desc;SELECT * FROM tbl_goaid_corporate order by id desc;";
+            sql+= "SELECT * FROM tbl_partner_enquiry order by id desc;SELECT * FROM tbl_contact order by id desc";
+        dbConn2.query(sql,(error,results,fields) => {
+            if (error) {console.log("RETRIEVING ERROR =====>>>>",error)}
+            var tbl_need_ambulance = results[0];
+            var tbl_goaid_corporate = results[1];
+            var tbl_partner_enquiry = results[2];
+            var tbl_contact = results[3];
+            res.render('admin/partners',{
+                current_admin:sess,
+                contact_queries:tbl_contact,
+                corporate_queries:tbl_goaid_corporate,
+                booking_queries:tbl_need_ambulance,
+                partner_queries:tbl_partner_enquiry
+            });
+        });
+    }else{
+        res.render('admin/login');
+    }
+
 });
 //EXPORTS
 module.exports = router;
