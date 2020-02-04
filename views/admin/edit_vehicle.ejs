@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Edit Vehicle</title>
+    <link rel="stylesheet" href="../css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  </head>
+  <body>
+    <!-- SIDE BAR START -->
+      <%- include('../partials/admin_sidebar.ejs'); %>
+    <!-- SIDE BAR END -->
+    <section id="contents">
+      <nav class="navbar navbar-default">
+        <!-- NAV BAR START -->
+          <%- include('../partials/admin_navbar.ejs'); %>
+        <!-- NAV BAR END -->
+      </nav>
+      <div class="container-fluid forms-main_agileits">
+         <div class="wthree_general graph-form " style="background-color: white; border-radius: 15px; margin-top: 20px;">
+            <h3 class="w3_inner_tittle two text-center">Vehicle Details </h3>
+            <div class="grid-1 ">
+               <div class="form-body">
+                  <form class="form-horizontal">
+                     <div class="form-group">
+                        <label for="focusedinput" class="col-sm-2 control-label">
+                           <NAV>VEHICLE NAME</NAV>
+                        </label>
+                        <div class="col-sm-8">
+                           <input type="text" class="form-control1" id="focusedinput" placeholder="Vehicle name....">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="focusedinput" class="col-sm-2 control-label">
+                           <NAV>VEHICLE HINDI NAME</NAV>
+                        </label>
+                        <div class="col-sm-8">
+                           <input type="text" class="form-control1" id="focusedinput" placeholder="Vehicle hindi name....">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="checkbox" class="col-sm-2 control-label">VEHICLE TYPE</label>
+                        <div class="col-sm-8">
+                           <div class="checkbox-inline"><label><input type="checkbox"> AUDI</label></div>
+                           <div class="checkbox-inline"><label><input type="checkbox" checked=""> SEDAN</label></div>
+                           <div class="checkbox-inline"><label><input type="checkbox"> BMW </label></div>
+                           <div class="checkbox-inline"><label><input type="checkbox"> HONDA </label></div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="selector1" class="col-sm-2 control-label">VEHICLE FULL NAME</label>
+                        <div class="col-sm-8">
+                           <select name="selector1" id="selector1" class="form-control1">
+                              <option>Ambulance....</option>
+                              <option>Ambulance services</option>
+                              <option>Ambulance provider</option>
+                              <option>Ambulance manufacting</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="focusedinput" class="col-sm-2 control-label">
+                           <NAV>VEHICLE PRICE</NAV>
+                        </label>
+                        <div class="col-sm-8">
+                           <input type="text" class="form-control1" id="focusedinput" placeholder="Vehicle price....">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 control-label">DESCRIPTION</label>
+                        <div class="col-sm-8"><textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea></div>
+                     </div>
+                     <div class="form-group">
+                        <label for="txtarea1" class="col-sm-2 control-label">Upload Photo option</label>
+                        <div class="col-sm-8"><textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea></div>
+                     </div>
+                     <div class="form-group text-center">
+                        <input type="submit" class="btn btn-info" value="Submit Details">
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+    </section>
+    <script src='http://code.jquery.com/jquery-latest.js' type="text/javascript"></script>
+    <script src='../js/main.js' type="text/javascript"></script>
+    <script src='../js/dashboard.js' type="text/javascript"></script>
+  </body>
+</html>
+

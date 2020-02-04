@@ -58,6 +58,7 @@ router.get('/login',(req,res) => {
 router.get('/admin_dashboard',(req,res) => {
 	sess = req.session;
     if(true) {
+        console.log("global varibale is ye dash board wala =>>",globalstring)
     	console.log("successfully email set =>",sess);
         dbConn2.query('SELECT long_lat FROM reg where long_lat IS NOT NULL',(error , results , fields) => {
             if(error){console.log(error);}
@@ -101,23 +102,25 @@ router.get('/dashboard_map',(req,res) => {
 
 //END
 router.post('/login/admin_dashboard',(req,res) => {
-	sess = req.session;
-    sess.email = req.body.email;
-    console.log("inside session =>",sess.email);
+	// global.sess = req.session;
+    // sess.email = req.body.email;
+    // console.log("inside session =>",sess.email);
     // res.end('done');
 	// req.body.email,req.body.password
+
 	var email = req.body.email;
 	var password = req.body.password;
 	if (email && password) {
 		dbConn.query('SELECT * FROM admin where email=? AND password=?', [req.body.email,req.body.password], function (error, results, fields) {
 	      if (error) throw error;
 	      if (Object.entries(results).length > 0) {
-	      	req.session.loggedin = true;
-			req.session.email = email;
-			console.log("redirecting to  =>" ,req.path)
-			return  res.redirect('/admin/admin_dashboard');
+    	      	req.session.loggedin = true;
+    			req.session.email = email;
+                global.sess = req.session;
+    			console.log("redirecting to  =>" ,req.path)
+    			return  res.redirect('/admin/admin_dashboard');
 	      }else{
-	      	res.send('Incorrect Username and/or Password!');
+	      	    res.send('Incorrect Username and/or Password!');
 	       	// return res.redirect('/admin/admin_dashboard.ejs');
 	       }
 	       res.end();
@@ -145,8 +148,9 @@ router.get('/logout',(req,res) => {
 //GET ADD ADMIN FORM
 router.get('/add_admin',(req,res) => {
 	// res.send("hi how r u ?")
-	sess = req.session;
-    if(true) {
+	// sess = req.session;
+    if(sess.email && sess.loggedin) {
+        console.log("GLOBALLY MADE SSESSION VARIBALE TESTING ==>>",sess.email)
     	console.log("add admin page =>",sess);
         return res.render('admin/add_admin',{
         	current_admin:sess
@@ -293,6 +297,22 @@ router.get('/vehicles',(req,res) => {
         });
     }else{
         res.render('admin/login');
+    }
+});
+
+//GET ADD VEHICLE FORM
+router.get('/add_vehicle',(req,res) => {
+    // res.send("hi how r u ?")
+    // sess = req.session;
+    if(sess.email && sess.loggedin) {
+        console.log("GLOBALLY MADE SSESSION VARIBALE TESTING ==>>",sess.email)
+        console.log("add admin page =>",sess);
+        return res.render('admin/add_vehicle',{
+            current_admin:sess
+        });
+
+    }else{
+    res.render('admin/login.ejs');
     }
 });
 

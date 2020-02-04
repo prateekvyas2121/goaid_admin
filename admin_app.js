@@ -32,12 +32,13 @@ app.set('view engine','ejs');
 	// //admin CRUD routes
 	// const admin_crud = require('./routes/admin_crud.js');
 	// app.use('add_admin',admin_crud);
+  		global.globalstring = "hii tbis is global variable";
 
 app.listen(5000, (error) => {
 	if (error) {
 		console.log("ERROR =============>>>>>>",error);
 	}
-	console.log(' GoAid admin is running on port 5000');
+	console.log(' GoAid admin is running on port 5000 and globalstring is ==>>',globalstring);
 });
 
 // module.exports = app;
